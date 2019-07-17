@@ -3,13 +3,13 @@
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
 
-An opinionated, [convention-over-configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) Express-based restful API server featuring [yup](https://www.npmjs.com/package/yup) validation.
+An opinionated, [convention-over-configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) [Express](https://expressjs.com)-based restful API server featuring [yup](https://www.npmjs.com/package/yup) validation.
 
 ## Usage
 
 ### Initialization
 
-You can use `@appgeist/restful-api` either as an [Express](https://expressjs.com) middleware:
+You can use `@appgeist/restful-api` either as an _Express_ middleware:
 
 ```js
 const express = require("express");
@@ -84,7 +84,12 @@ A function handler accepts an optional object parameter in the form of `{ params
 
 For simple cases when you don't care about validation, you can export just the handler, like so: `module.exports = () => {/* handle request here... */};`.
 
-For nested paths like `routes/departments/[id]/employees/[id]/get.js`, **ancestor-level parameter names are _magically_ translated** and your handler `params` will be something like `{ departmentId, id }`.
+### Nested paths
+
+For nested paths, **ancestor-level parameter names are _magically_ renamed** with the help of [`pluralize.singular`](https://www.npmjs.com/package/pluralize):
+
+`routes/departments/[id]/employees/[id]/get.js -> params: { departmentId, id }`
+`routes/departments/[id]/employees/[id]/projects/[id]/get.js -> params: { departmentId, projectId, id }`
 
 ### Validation errors
 
