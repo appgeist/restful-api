@@ -3,7 +3,7 @@
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
 
-An opinionated, [convention-over-configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) Express-based restful API server featuring yup validation.
+An opinionated, [convention-over-configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) Express-based restful API server featuring [yup](https://www.npmjs.com/package/yup) validation.
 
 ## Usage
 
@@ -78,7 +78,7 @@ routes/departments/[id]/employees/[id]/delete.js => DELETE /departments/3/employ
 Each module must export:
 
 - `handler` - a mandatory function handler;
-- `paramsSchema`, `querySchema`, `bodySchema` - optional schemas to validate the incoming request params, query and body. These can be simple objects (for brevity, in which case they will be converted to yup schemas automatically) or yup schemas (for more complex scenarios, i.e. when you need to specify a `.noUnknown()` modifier).
+- `paramsSchema`, `querySchema`, `bodySchema` - optional schemas to validate the incoming request params, query and body. These can be simple objects (for brevity, in which case they will be converted to _yup_ schemas automatically) or _yup_ schemas (for more complex scenarios, i.e. when you need to specify a `.noUnknown()` modifier).
 
 A function handler accepts an optional object parameter in the form of `{ params, query, body, req }` and must return the data that will be sent back to the client, or a Promise resolving with the data.
 
