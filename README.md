@@ -104,7 +104,7 @@ When request data validation fails, the client will receive a response with HTTP
 
 ### Throwing errors
 
-If a function handler throws an `ApiError(httpStatusCode)` (also exported from this package), the client will receive a response with the specified HTTP status code and a JSON body like `{ "message": "Why it failed" }`.
+If a function handler throws an `ApiError(httpStatusCode)` (also [exported](lib/ApiError.js) from this package), the client will receive a response with the specified HTTP status code and a JSON body like `{ "message": "Why it failed" }`.
 
 The `ApiError` constructor accepts an HTTP status code number or an object structured like `{ status, message }`.
 
