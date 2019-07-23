@@ -22,7 +22,7 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@appgeist/eslint-config-base": "^1.1.1",
+    "@appgeist/eslint-config-base": "^1.1.2",
     "@types/chalk": "^2.2.0",
     "@types/express": "^4.17.0",
     "@types/fs-readdir-recursive": "^1.0.0",
@@ -37,7 +37,7 @@
     "chalk": "^2.4.2",
     "express": "^4.17.1",
     "fs-readdir-recursive": "^1.1.0",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.15",
     "pluralize": "^8.0.0",
     "underscore.string": "^3.3.5"
   },
