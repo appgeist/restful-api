@@ -3,6 +3,8 @@
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
 
+![AppGeist Restful API](https://user-images.githubusercontent.com/581999/61737471-f5aa8600-ad90-11e9-8059-cff04086f3bd.png)
+
 An opinionated, [convention-over-configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) [Express](https://expressjs.com)-based restful API server featuring [yup](https://www.npmjs.com/package/yup) validation.
 
 ## Usage
