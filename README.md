@@ -93,7 +93,9 @@ For nested paths, **ancestor-level parameter names are _magically_ renamed** wit
 `routes/departments/[id]/employees/[id]/get.js -> params: { departmentId, id }`
 `routes/departments/[id]/employees/[id]/projects/[id]/get.js -> params: { departmentId, projectId, id }`
 
-### Validation errors
+### Default error handling
+
+#### Validation errors
 
 When request data validation fails, the client will receive a response with HTTP status code `400`/`BAD_REQUEST` and a JSON body describing the error provided by [`yup.validate(data, { abortEarly: false })`](https://github.com/jquense/yup#mixedvalidatevalue-any-options-object-promiseany-validationerror):
 
@@ -104,7 +106,7 @@ When request data validation fails, the client will receive a response with HTTP
 }
 ```
 
-### Throwing errors
+#### Throwing errors
 
 If a function handler throws an `ApiError(httpStatusCode)` (also [exported](lib/ApiError.js) from this package), the client will receive a response with the specified HTTP status code and a JSON body like `{ "message": "Why it failed" }`.
 
@@ -116,6 +118,28 @@ Using the constructor without parameters will result in a respose with HTTP stat
 {
   "message": "Internal Server Error"
 }
+```
+
+### Custom error handling
+
+You can override the default error handling mechanism by providing a custom error handling function like so:
+
+```js
+const path = require("path");
+const api = require("@appgeist/restful-api");
+
+const [host, port] = ["0.0.0.0", 3000];
+
+api(path.join(__dirname, "api-routes"), {
+  errorHandler: ({ err, res }) => {
+    res.status(500).send("Error");
+    console.log(err.stack);
+  }
+}).listen(port, host, err => {
+  if (err) throw err;
+  // eslint-disable-next-line no-console
+  console.log(`Server listening on http://${host}:${port}...`);
+});
 ```
 
 ## Example
