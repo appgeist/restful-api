@@ -7,7 +7,6 @@ const buildRoutes = require('./lib/buildRoutes');
  *
  * @param {string} [routesDir] Folder where route definitions reside (relative to `cwd()`),
  *    defaults to `./routes`
- * @returns {import('express')} Express instance
  * @param {Options} [options] Custom options
  * @returns {import('express')} Express instance
  */
