@@ -10,7 +10,7 @@ const buildRoutes = require('./lib/buildRoutes');
  * @param {Options} [options] Custom options
  * @returns {import('express')} Express instance
  */
-module.exports = exports = (routesDir = './routes', { errorHandler = require('./lib/errorHandler') }) => {
+module.exports = exports = (routesDir = './routes', { errorHandler = require('./lib/errorHandler') } = {}) => {
   const app = express();
   app.use(express.json());
   buildRoutes({ app, routesDir });
