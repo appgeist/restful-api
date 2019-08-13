@@ -77,9 +77,10 @@ routes/departments/[id]/employees/[id]/patch.js => PATCH /departments/3/employee
 routes/departments/[id]/employees/[id]/delete.js => DELETE /departments/3/employees/165
 ```
 
-Each module must export:
+Each module exports:
 
-- `handler` - a mandatory function handler;
+- `beforeRequest` - an optional before request handler function;
+- `onRequest` - a mandatory request handler function;
 - `paramsSchema`, `querySchema`, `bodySchema` - optional schemas to validate the incoming request params, query and body. These can be simple objects (for brevity, in which case they will be converted to _yup_ schemas automatically) or _yup_ schemas (for more complex scenarios, i.e. when you need to specify a `.noUnknown()` modifier).
 
 A function handler accepts an optional object parameter in the form of `{ params, query, body, req }` and must return the data that will be sent back to the client, or a Promise resolving with the data.
@@ -151,7 +152,7 @@ const Department = require("models/Department");
 
 // simple handler, without validation
 module.exports = () => Department.listAll();
-// ...or exports.handler = () => Department.listAll();
+// ...or exports.onRequest = () => Department.listAll();
 ```
 
 `routes/departments/[id]/patch.js`:
@@ -175,7 +176,7 @@ exports.bodySchema = object({
   description: string().min(2).max(1000).required()
 }).noUnknown();
 
-exports.handler = async ({ params: { id }, body, req }) => {
+exports.onRequest = async ({ params: { id }, body, req }) => {
   // throwing an ApiError(403) will result in a 403 status code being sent to the client
   if (!(ACL.isManager(req.userId))) throw new ApiError(FORBIDDEN);
   const department = await Department.updateById(id, { data: body });
@@ -196,7 +197,11 @@ exports.paramsSchema = {
   id: number().positive().integer().required()
 };
 
-exports.handler = async ({ params: { departmentId, id } }) => {
+exports.beforeRequest = ({ url }) => {
+  console.log(`Preparing to respond to ${url}`);
+};
+
+exports.onRequest = async ({ params: { departmentId, id } }) => {
   const employee = await Employee.getById(id);
   employee.department = await Department.getById(departmentId);
   return employee;
