@@ -1,6 +1,6 @@
 {
   "name": "@appgeist/restful-api",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "An opinionated, convention-over-configuration Express-based API restful server featuring yup validation",
   "keywords": [
     "api",
